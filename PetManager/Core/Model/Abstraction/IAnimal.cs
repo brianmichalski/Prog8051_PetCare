@@ -9,6 +9,7 @@ namespace PetManager.Core.Model.Abstraction
         string Name { get; set; }
 
         public CaringSetup CaringSetup { get; set; }
+        public IDictionary<AnimalNeedEnum, DateTime> LastTimeCaringMap { get; }
 
         public void Rest(DateTime currentTime);
 
@@ -17,7 +18,5 @@ namespace PetManager.Core.Model.Abstraction
         public void Eat(DateTime currentTime);
 
         public void Play(DateTime currentTime);
-        
-        public int CalculateNeedStressLevel(AnimalNeedEnum need, DateTime checkingTime);
     }
 }
