@@ -80,19 +80,17 @@ namespace PetManager.Core.Model.Abstraction
         private int CalculateStressLevel(int maximumIntervalInHours, 
             DateTime lastCaringTime, DateTime stressCheckingTime)
         {
-            int result = 0;
+            const int MAX_STRESS = 10;
+            if (lastCaringTime.Equals(DateTime.MinValue))
+            {
+                return MAX_STRESS;
+            }
 
             TimeSpan timeSpan = stressCheckingTime.Subtract(lastCaringTime);
 
             double delayRatio =  (double) timeSpan.Hours / maximumIntervalInHours;
 
-            Console.WriteLine(string.Format("lastCaringTime = {0}", lastCaringTime));
-            Console.WriteLine(string.Format("timeSpan = {0}", timeSpan));
-            Console.WriteLine(string.Format("delayRatio = {0}", delayRatio));
-
-            result = 10 * (delayRatio < 1 ? (int) Math.Ceiling(delayRatio) : 1);
-
-            return result;
+            return MAX_STRESS * (delayRatio < 1 ? (int) Math.Ceiling(delayRatio) : 1);
         }
     }
 }
