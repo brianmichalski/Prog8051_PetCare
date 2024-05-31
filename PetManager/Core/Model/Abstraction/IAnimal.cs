@@ -1,5 +1,4 @@
-﻿using PetManager.Core.Model;
-using PetManager.Core.Model.Type;
+﻿using PetManager.Core.Model.Type;
 
 namespace PetManager.Core.Model.Abstraction
 {

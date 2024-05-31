@@ -1,6 +1,3 @@
-using NUnit.Framework.Legacy;
-using PetManager.Core.Model.Abstraction;
-using PetManager.Core.Model.Implementation;
 using PetManager.Core.Model.Type;
 using PetManager.Service;
 

@@ -1,17 +1,28 @@
 ﻿using PetManager.Core.Model;
 using PetManager.Core.Model.Type;
+using System.ComponentModel;
 
 namespace PetManager.Core.Model.Abstraction
 {
     public abstract class AbstractAnimal : IAnimal
     {
         public SpecieEnum Specie { get; }
+
         public string Name { get; set; }
+
         public CaringConstraint CaringConstraint { get; set; }
-        public DateTime LastTimeResting { get; set; }
-        public DateTime LastTimeHydrating { get; set; }
-        public DateTime LastTimeEating { get; set; }
-        public DateTime LastTimePlaying { get; set; }
+
+        public DateTime LastTimeResting { get; set; } = DateTime.MinValue;
+
+        [DefaultValue(null)]
+        public DateTime LastTimeHydrating { get; set; } = DateTime.MinValue;
+
+        [DefaultValue(null)]
+        public DateTime LastTimeEating { get; set; } = DateTime.MinValue;
+
+        [DefaultValue(null)]
+        public DateTime LastTimePlaying { get; set; } = DateTime.MinValue;
+
         protected AbstractAnimal(SpecieEnum specie,
                                  string name)
         {
@@ -70,6 +81,8 @@ namespace PetManager.Core.Model.Abstraction
             DateTime lastCaringTime, DateTime stressCheckingTime)
         {
             int result = 0;
+
+            Console.WriteLine(lastCaringTime);
 
             TimeSpan timeSpan = stressCheckingTime.Subtract(lastCaringTime);
 
