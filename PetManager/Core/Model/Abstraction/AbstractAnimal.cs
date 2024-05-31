@@ -82,11 +82,13 @@ namespace PetManager.Core.Model.Abstraction
         {
             int result = 0;
 
-            Console.WriteLine(lastCaringTime);
-
             TimeSpan timeSpan = stressCheckingTime.Subtract(lastCaringTime);
 
             double delayRatio =  (double) timeSpan.Hours / maximumIntervalInHours;
+
+            Console.WriteLine(string.Format("lastCaringTime = {0}", lastCaringTime));
+            Console.WriteLine(string.Format("timeSpan = {0}", timeSpan));
+            Console.WriteLine(string.Format("delayRatio = {0}", delayRatio));
 
             result = 10 * (delayRatio < 1 ? (int) Math.Ceiling(delayRatio) : 1);
 
