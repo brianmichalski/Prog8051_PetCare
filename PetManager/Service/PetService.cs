@@ -30,23 +30,27 @@ public class PetService
         return AnimalFactory.CreateAnimal(specie, name);
     }
 
-    public void Feed(IAnimal animal)
+    public IAnimal Feed(IAnimal animal)
     {
         animal.Eat();
+        return animal;
     }
 
-    public void PutToSleep(IAnimal animal)
+    public IAnimal PutToSleep(IAnimal animal)
     {
         animal.Rest();
+        return animal;
     }
 
-    public void GiveWater(IAnimal animal)
+    public IAnimal GiveWater(IAnimal animal)
     {
         animal.Hydrate();
+        return animal;
     }
 
-    public void PlayWith(IAnimal animal)
+    public IAnimal PlayWith(IAnimal animal)
     {
         animal.Play();
+        return animal;
     }
 }

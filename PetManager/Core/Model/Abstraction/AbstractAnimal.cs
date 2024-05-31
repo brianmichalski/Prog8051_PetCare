@@ -72,9 +72,10 @@ namespace PetManager.Core.Model.Abstraction
             int result = 0;
 
             TimeSpan timeSpan = stressCheckingTime.Subtract(lastCaringTime);
-            double delayRatio = (timeSpan.Hours / maximumIntervalInHours);
 
-            result = 10 * (delayRatio < 1 ? (int) Math.Floor(delayRatio) : 1);
+            double delayRatio =  (double) timeSpan.Hours / maximumIntervalInHours;
+
+            result = 10 * (delayRatio < 1 ? (int) Math.Ceiling(delayRatio) : 1);
 
             return result;
         }
