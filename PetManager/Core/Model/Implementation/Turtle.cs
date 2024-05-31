@@ -9,10 +9,9 @@ namespace PetManager.Core.Model.Implementation
 
         protected override CaringConstraint InitializeDefaultCaringContraint()
         {
-            return new CaringConstraint
+            return new CaringConstraint(this,
+                new List<FoodGroupEnum>([FoodGroupEnum.Vegetable]))
             {
-                Animal = this,
-                FoodTypes = new List<FoodGroupEnum>([FoodGroupEnum.Vegetable]),
                 EatingIntervalInHours = 12,
                 HydratingIntervalInHours = 3,
                 RestingIntervalInHours = 4,

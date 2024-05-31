@@ -5,8 +5,8 @@ namespace PetManager.Core.Model
 {
     public class CaringConstraint
     {
-        public IAnimal Animal { get; set; }
-        public List<FoodGroupEnum> FoodTypes { get; set; }
+        public IAnimal Animal { get; }
+        public List<FoodGroupEnum> FoodTypes { get; }
 
         public int EatingIntervalInHours;
 
@@ -16,5 +16,10 @@ namespace PetManager.Core.Model
 
         public int PlayingIntervalInHours;
 
+        public CaringConstraint(IAnimal animal, List<FoodGroupEnum> foodTypes) 
+        { 
+            this.Animal = animal;
+            this.FoodTypes = foodTypes;
+        }
     }
 }
