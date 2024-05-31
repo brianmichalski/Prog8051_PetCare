@@ -1,25 +1,21 @@
-﻿using PetManager.Core.Model.Abstraction;
-using PetManager.Core.Model.Type;
+﻿using PetManager.Core.Model.Type;
 
 namespace PetManager.Core.Model
 {
     public class CaringConstraint
     {
-        public IAnimal Animal { get; }
-        public List<FoodGroupEnum> FoodTypes { get; }
+        AnimalNeedEnum AnimalNeed;
+        public int MinimumIntervalInHours { get; set; }
+        public int MaximumIntervalInHours { get; set; }
+        public Dictionary<AnimalNeedEnum, int> LimitsForOtherNeeds { get; set; }
 
-        public int EatingIntervalInHours;
-
-        public int HydratingIntervalInHours;
-
-        public int RestingIntervalInHours;
-
-        public int PlayingIntervalInHours;
-
-        public CaringConstraint(IAnimal animal, List<FoodGroupEnum> foodTypes) 
-        { 
-            this.Animal = animal;
-            this.FoodTypes = foodTypes;
+        public CaringConstraint(AnimalNeedEnum animalNeed, int minimumIntervalInHours, int maximumIntervalInHours, 
+            Dictionary<AnimalNeedEnum, int> limitsForOtherNeeds)
+        {
+            this.AnimalNeed = animalNeed;
+            this.MinimumIntervalInHours = minimumIntervalInHours;
+            this.MaximumIntervalInHours = maximumIntervalInHours;
+            this.LimitsForOtherNeeds = limitsForOtherNeeds;
         }
     }
 }

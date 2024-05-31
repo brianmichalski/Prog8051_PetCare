@@ -8,27 +8,16 @@ namespace PetManager.Core.Model.Abstraction
 
         string Name { get; set; }
 
-        CaringConstraint CaringConstraint { get; }
+        public CaringSetup CaringSetup { get; set; }
 
-        DateTime LastTimeResting { get; set; }
-        DateTime LastTimeHydrating { get; set; }
-        DateTime LastTimeEating { get; set; }
-        DateTime LastTimePlaying { get; set; }
+        public void Rest(DateTime currentTime);
 
-        public void Rest();
+        public void Hydrate(DateTime currentTime);
 
-        public void Hydrate();
+        public void Eat(DateTime currentTime);
 
-        public void Eat();
-
-        public void Play();
-
-        public int CalculateRestingStressLevel(DateTime checkingTime);
-
-        public int CalculateEatingStressLevel(DateTime checkingTime);
-
-        public int CalculateHydratingStressLevel(DateTime checkingTime);
-
-        public int CalculatePlayingStressLevel(DateTime checkingTime);
+        public void Play(DateTime currentTime);
+        
+        public int CalculateNeedStressLevel(AnimalNeedEnum need, DateTime checkingTime);
     }
 }

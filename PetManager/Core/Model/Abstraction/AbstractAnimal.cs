@@ -1,4 +1,5 @@
 ﻿using PetManager.Core.Model;
+using PetManager.Core.Model.Exception;
 using PetManager.Core.Model.Type;
 using System.ComponentModel;
 
@@ -10,70 +11,42 @@ namespace PetManager.Core.Model.Abstraction
 
         public string Name { get; set; }
 
-        public CaringConstraint CaringConstraint { get; set; }
+        public CaringSetup CaringSetup { get; set; }
 
-        public DateTime LastTimeResting { get; set; } = DateTime.MinValue;
+        public Dictionary<AnimalNeedEnum, DateTime> LastTimeCaringMap;
 
-        [DefaultValue(null)]
-        public DateTime LastTimeHydrating { get; set; } = DateTime.MinValue;
-
-        [DefaultValue(null)]
-        public DateTime LastTimeEating { get; set; } = DateTime.MinValue;
-
-        [DefaultValue(null)]
-        public DateTime LastTimePlaying { get; set; } = DateTime.MinValue;
-
-        protected AbstractAnimal(SpecieEnum specie,
-                                 string name)
+        protected AbstractAnimal(SpecieEnum specie, string name)
         {
             this.Specie = specie;
             this.Name = name;
-            this.CaringConstraint = InitializeDefaultCaringContraint();
+            this.CaringSetup = InitializeDefaultCaringSetup();
+            this.LastTimeCaringMap = new Dictionary<AnimalNeedEnum, DateTime>();
+            foreach (AnimalNeedEnum animalNeed in Enum.GetValues(typeof(AnimalNeedEnum)))
+            {
+                this.LastTimeCaringMap.Add(animalNeed, DateTime.MinValue);
+            }
         }
-        protected abstract CaringConstraint InitializeDefaultCaringContraint();
-        public void Rest() { 
-            this.LastTimeResting = DateTime.Now;
+        protected abstract CaringSetup InitializeDefaultCaringSetup();
+        public void Rest(DateTime currentTime) {
+            this.LastTimeCaringMap[AnimalNeedEnum.Resting] = currentTime;
         }
-        public void Hydrate()
+        public void Hydrate(DateTime currentTime)
         {
-            this.LastTimeHydrating = DateTime.Now;
+            this.LastTimeCaringMap[AnimalNeedEnum.Hydrating] = currentTime;
         }
-        public void Eat()
+        public void Eat(DateTime currentTime)
         {
-            this.LastTimeEating = DateTime.Now;
+            this.LastTimeCaringMap[AnimalNeedEnum.Eating] = currentTime;
         }
-        public void Play()
+        public void Play(DateTime currentTime)
         {
-            this.LastTimePlaying = DateTime.Now;
+            this.LastTimeCaringMap[AnimalNeedEnum.Resting] = currentTime;
         }
-        public int CalculateRestingStressLevel(DateTime checkingTime)
-        {
-            return this.CalculateStressLevel(
-                this.CaringConstraint.RestingIntervalInHours,
-                this.LastTimeResting,
-                checkingTime);
-        }
-        public int CalculateEatingStressLevel(DateTime checkingTime)
+        public int CalculateNeedStressLevel(AnimalNeedEnum need, DateTime checkingTime)
         {
             return this.CalculateStressLevel(
-                this.CaringConstraint.EatingIntervalInHours,
-                this.LastTimeEating,
-                checkingTime);
-        }
-
-        public int CalculateHydratingStressLevel(DateTime checkingTime)
-        {
-            return this.CalculateStressLevel(
-                this.CaringConstraint.HydratingIntervalInHours,
-                this.LastTimeHydrating,
-                checkingTime);
-        }
-
-        public int CalculatePlayingStressLevel(DateTime checkingTime)
-        {
-            return this.CalculateStressLevel(
-                this.CaringConstraint.PlayingIntervalInHours,
-                this.LastTimePlaying,
+                this.CaringSetup.CaringConstraints[need].MaximumIntervalInHours,
+                this.LastTimeCaringMap[need],
                 checkingTime);
         }
 

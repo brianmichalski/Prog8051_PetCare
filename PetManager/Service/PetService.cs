@@ -30,27 +30,27 @@ public class PetService
         return AnimalFactory.CreateAnimal(specie, name);
     }
 
-    public IAnimal Feed(IAnimal animal)
+    public IAnimal Feed(IAnimal animal, DateTime currentTime)
     {
-        animal.Eat();
+        animal.Eat(currentTime);
         return animal;
     }
 
-    public IAnimal PutToSleep(IAnimal animal)
+    public IAnimal PutToSleep(IAnimal animal, DateTime currentTime)
     {
-        animal.Rest();
+        animal.Rest(currentTime);
         return animal;
     }
 
-    public IAnimal GiveWater(IAnimal animal)
+    public IAnimal GiveWater(IAnimal animal, DateTime currentTime)
     {
-        animal.Hydrate();
+        animal.Hydrate(currentTime);
         return animal;
     }
 
-    public IAnimal PlayWith(IAnimal animal)
+    public IAnimal PlayWith(IAnimal animal, DateTime currentTime)
     {
-        animal.Play();
+        animal.Play(currentTime);
         return animal;
     }
 }
