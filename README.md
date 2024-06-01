@@ -1,1 +1,4 @@
-# Prog8051_PetCare
+# Prog8051 Assignment 1 - Pet Care App
+
+Presentation video:
+https://youtu.be/pPFHsOtoSqk
