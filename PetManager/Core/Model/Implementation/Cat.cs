@@ -5,7 +5,7 @@ namespace PetManager.Core.Model.Implementation
 {
     public class Cat : AbstractAnimal
     {
-        public Cat(string name) : base(SpecieEnum.Cat, name) { }
+        public Cat(string name, ColorEnum color) : base(SpecieEnum.Cat, name, color) { }
 
         protected override CaringSetup InitializeDefaultCaringSetup()
         {

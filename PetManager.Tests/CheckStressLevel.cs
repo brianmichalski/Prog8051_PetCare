@@ -16,20 +16,20 @@ public class CheckStressLevelTests
     }
 
     [Test]
-    [TestCase(AnimalNeedEnum.Eating, SpecieEnum.Dog, "Snoopy")]
-    public void StressLevel_AfterCreatingAnimal_Pass(AnimalNeedEnum testingNeed, SpecieEnum specie, string name)
+    [TestCase(AnimalNeedEnum.Eating, SpecieEnum.Dog, "Snoopy", ColorEnum.Gray)]
+    public void StressLevel_AfterCreatingAnimal_Pass(AnimalNeedEnum testingNeed, SpecieEnum specie, string name, ColorEnum color)
     {
-        var animal = this.PetService.CreateAnimal(specie, name);
+        var animal = this.PetService.CreateAnimal(specie, name, color);
 
         Assert.That(CaringStressCalculator.CalculateNeedStressLevel(
             animal, testingNeed, DateTime.Now), Is.EqualTo(0));
     }
 
     [Test]
-    [TestCase(AnimalNeedEnum.Eating, SpecieEnum.Cat, "Meow")]
-    public void StressLevel_AfterFirstCaring_Pass(AnimalNeedEnum testingNeed, SpecieEnum specie, string name)
+    [TestCase(AnimalNeedEnum.Eating, SpecieEnum.Dog, "Snoopy", ColorEnum.White)]
+    public void StressLevel_AfterFirstCaring_Pass(AnimalNeedEnum testingNeed, SpecieEnum specie, string name, ColorEnum color)
     {
-        var animal = this.PetService.CreateAnimal(specie, name);
+        var animal = this.PetService.CreateAnimal(specie, name, color);
 
         int minimumIntervalForCaring = animal.CaringSetup.CaringConstraints[testingNeed].MinimumIntervalInHours;
 
@@ -55,10 +55,10 @@ public class CheckStressLevelTests
     }
 
     [Test]
-    [TestCase(AnimalNeedEnum.Eating, SpecieEnum.Cat, "Meow")]
-    public void StressLevel_RangeCovering_Pass(AnimalNeedEnum testingNeed, SpecieEnum specie, string name)
+    [TestCase(AnimalNeedEnum.Eating, SpecieEnum.Cat, "Meow", ColorEnum.Gray)]
+    public void StressLevel_RangeCovering_Pass(AnimalNeedEnum testingNeed, SpecieEnum specie, string name, ColorEnum color)
     {
-        var animal = this.PetService.CreateAnimal(specie, name);
+        var animal = this.PetService.CreateAnimal(specie, name, color);
 
         CaringConstraint caringConstraint = animal.CaringSetup.CaringConstraints[testingNeed];
 
@@ -91,10 +91,10 @@ public class CheckStressLevelTests
         }
     }
 
-    [TestCase(AnimalNeedEnum.Eating, SpecieEnum.Cat, "Meow")]
-    public void StressLevel_TryToCareBeforeNeeding_Fail(AnimalNeedEnum testingNeed, SpecieEnum specie, string name)
+    [TestCase(AnimalNeedEnum.Eating, SpecieEnum.Cat, "Meow", ColorEnum.Gray)]
+    public void StressLevel_TryToCareBeforeNeeding_Fail(AnimalNeedEnum testingNeed, SpecieEnum specie, string name, ColorEnum color)
     {
-        var animal = this.PetService.CreateAnimal(specie, name);
+        var animal = this.PetService.CreateAnimal(specie, name, color);
 
         int minimumIntervalForCaring = animal.CaringSetup.CaringConstraints[testingNeed].MinimumIntervalInHours;
 

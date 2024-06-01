@@ -5,7 +5,7 @@ namespace PetManager.Core.Model.Implementation
 {
     public class Dog : AbstractAnimal
     {
-        public Dog(string name) : base(SpecieEnum.Dog, name) { }
+        public Dog(string name, ColorEnum color) : base(SpecieEnum.Cat, name, color) { }
         protected override CaringSetup InitializeDefaultCaringSetup()
         {
             // Eating constraint

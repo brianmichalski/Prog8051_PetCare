@@ -10,15 +10,17 @@ namespace PetManager.Core.Model.Abstraction
         public SpecieEnum Specie { get; }
 
         public string Name { get; set; }
+        public ColorEnum Color { get; set; }
 
         public CaringSetup CaringSetup { get; set; }
 
         public IDictionary<AnimalNeedEnum, DateTime> LastTimeCaringMap { get; }
 
-        protected AbstractAnimal(SpecieEnum specie, string name)
+        protected AbstractAnimal(SpecieEnum specie, string name, ColorEnum color)
         {
             this.Specie = specie;
             this.Name = name;
+            this.Color = color;
             this.CaringSetup = InitializeDefaultCaringSetup();
             this.LastTimeCaringMap = new Dictionary<AnimalNeedEnum, DateTime>();
 
@@ -27,6 +29,7 @@ namespace PetManager.Core.Model.Abstraction
             {
                 this.LastTimeCaringMap.Add(animalNeed, nowTime);
             }
+            Color = color;
         }
         protected abstract CaringSetup InitializeDefaultCaringSetup();
         private void PerformCaring(AnimalNeedEnum need, DateTime performingTime)

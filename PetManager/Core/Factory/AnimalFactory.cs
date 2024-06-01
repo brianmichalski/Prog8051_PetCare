@@ -6,18 +6,18 @@ namespace PetManager.Core.Factory
 {
     public abstract class AnimalFactory
     {
-        public static IAnimal CreateAnimal(SpecieEnum specie, string name)
+        public static IAnimal CreateAnimal(SpecieEnum specie, string name, ColorEnum color)
         {
             switch (specie)
             {
                 case SpecieEnum.Cat:
-                    return new Cat(name);
+                    return new Cat(name, color);
                 case SpecieEnum.Dog:
-                    return new Dog(name);
+                    return new Dog(name, color);
                 case SpecieEnum.GuineaPig:
-                    return new GuineaPig(name);
+                    return new GuineaPig(name, color);
                 case SpecieEnum.Turtle:
-                    return new Turtle(name);
+                    return new Turtle(name, color);
             }
             throw new NotImplementedException("Specie not recognized.");
         }

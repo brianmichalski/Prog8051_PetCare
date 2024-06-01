@@ -5,7 +5,7 @@ namespace PetManager.Core.Model.Implementation
 {
     public class GuineaPig : AbstractAnimal
     {
-        public GuineaPig(string name) : base(SpecieEnum.GuineaPig, name) { }
+        public GuineaPig(string name, ColorEnum color) : base(SpecieEnum.Cat, name, color) { }
 
         protected override CaringSetup InitializeDefaultCaringSetup()
         {

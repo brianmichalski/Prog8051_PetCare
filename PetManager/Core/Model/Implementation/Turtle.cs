@@ -5,7 +5,7 @@ namespace PetManager.Core.Model.Implementation
 {
     public class Turtle : AbstractAnimal
     {
-        public Turtle(string name) : base(SpecieEnum.Turtle, name) { }
+        public Turtle(string name, ColorEnum color) : base(SpecieEnum.Cat, name, color) { }
 
         protected override CaringSetup InitializeDefaultCaringSetup()
         {

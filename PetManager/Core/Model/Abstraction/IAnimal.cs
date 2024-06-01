@@ -7,6 +7,7 @@ namespace PetManager.Core.Model.Abstraction
         SpecieEnum Specie { get; }
 
         string Name { get; set; }
+        ColorEnum Color { get; set; }
 
         public CaringSetup CaringSetup { get; set; }
         public IDictionary<AnimalNeedEnum, DateTime> LastTimeCaringMap { get; }

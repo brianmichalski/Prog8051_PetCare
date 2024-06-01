@@ -1,4 +1,5 @@
 ﻿using PetManager.Core.Factory;
+using PetManager.Core.Model;
 using PetManager.Core.Model.Abstraction;
 using PetManager.Core.Model.Type;
 using PetManager.Core.Model.Type.Tools;
@@ -24,10 +25,14 @@ public class PetService
     {
         return EnumUtils.MapToDescription<ColorEnum>();
     }
-
-    public IAnimal CreateAnimal(SpecieEnum specie, string name)
+    public Dictionary<AnimalNeedEnum, string> ListCaringNeeds()
     {
-        return AnimalFactory.CreateAnimal(specie, name);
+        return EnumUtils.MapToDescription<AnimalNeedEnum>();
+    }
+
+    public IAnimal CreateAnimal(SpecieEnum specie, string name, ColorEnum color)
+    {
+        return AnimalFactory.CreateAnimal(specie, name, color);
     }
 
     public IAnimal Feed(IAnimal animal, DateTime currentTime)
@@ -52,5 +57,10 @@ public class PetService
     {
         animal.Play(currentTime);
         return animal;
+    }
+
+    public double GetNeedStressLevel(IAnimal animal, AnimalNeedEnum need, DateTime checkingTime)
+    {
+        return CaringStressCalculator.CalculateNeedStressLevel(animal, need, checkingTime);
     }
 }
